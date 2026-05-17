@@ -67,6 +67,7 @@
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
     transition: all 0.3s;
+    gap: 16px;
   }
 
   nav.scrolled {
@@ -81,6 +82,7 @@
     font-weight: 800;
     font-size: 1.15rem;
     letter-spacing: -0.02em;
+    flex-shrink: 0;
   }
 
   .logo-dot {
@@ -98,8 +100,10 @@
   .nav-links {
     display: flex;
     align-items: center;
-    gap: 32px;
+    gap: 28px;
     list-style: none;
+    flex: 1;
+    justify-content: center;
   }
 
   .nav-links a {
@@ -108,26 +112,202 @@
     font-size: 0.875rem;
     font-weight: 500;
     transition: color 0.2s;
+    white-space: nowrap;
   }
 
   .nav-links a:hover { color: rgba(255,255,255,0.9); }
 
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
   .nav-cta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.18);
+    color: var(--white);
+    font-weight: 600;
+    font-size: 0.82rem;
+    padding: 9px 18px;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .nav-cta:hover { border-color: rgba(255,255,255,0.4); color: white; }
+
+  .nav-cta-wa {
     display: flex;
     align-items: center;
     gap: 8px;
     background: var(--grad);
     color: var(--white);
     font-weight: 700;
-    font-size: 0.85rem;
-    padding: 10px 22px;
+    font-size: 0.82rem;
+    padding: 9px 18px;
     border-radius: 100px;
     text-decoration: none;
     transition: all 0.2s;
     box-shadow: 0 4px 16px rgba(255,66,0,0.3);
+    white-space: nowrap;
   }
 
-  .nav-cta:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(255,66,0,0.4); }
+  .nav-cta-wa:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(255,66,0,0.4); }
+
+  /* ── HAMBURGER ── */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 8px;
+    transition: background 0.2s;
+  }
+  .nav-hamburger:hover { background: rgba(255,255,255,0.06); }
+  .nav-hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: rgba(255,255,255,0.8);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ── MOBILE DRAWER ── */
+  .mobile-drawer {
+    position: fixed;
+    top: 0; left: 0;
+    width: 280px;
+    height: 100vh;
+    background: rgba(10,6,0,0.98);
+    backdrop-filter: blur(24px);
+    border-right: 1px solid rgba(255,66,0,0.15);
+    z-index: 800;
+    transform: translateX(-100%);
+    transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    overflow-y: auto;
+  }
+
+  .mobile-drawer.open { transform: translateX(0); }
+
+  .drawer-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 799;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    backdrop-filter: blur(2px);
+  }
+
+  .drawer-overlay.open { opacity: 1; pointer-events: all; }
+
+  .drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    flex-shrink: 0;
+  }
+
+  .drawer-close {
+    background: rgba(255,255,255,0.06);
+    border: none;
+    color: rgba(255,255,255,0.6);
+    font-size: 1rem;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+  .drawer-close:hover { background: rgba(255,66,0,0.15); color: white; }
+
+  .drawer-links {
+    list-style: none;
+    padding: 16px 0;
+    flex: 1;
+  }
+
+  .drawer-links li a {
+    display: block;
+    padding: 13px 24px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    transition: all 0.2s;
+    border-left: 2px solid transparent;
+  }
+
+  .drawer-links li a:hover {
+    color: white;
+    background: rgba(255,66,0,0.06);
+    border-left-color: var(--orange);
+    padding-left: 28px;
+  }
+
+  .drawer-ctas {
+    padding: 20px 24px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+  .drawer-cta-secondary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.7);
+    font-size: 0.88rem;
+    font-weight: 600;
+    padding: 12px 16px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .drawer-cta-secondary:hover { border-color: var(--orange); color: white; }
+
+  .drawer-cta-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--grad);
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 13px 16px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.2s;
+    box-shadow: 0 6px 20px rgba(255,66,0,0.3);
+    text-align: center;
+  }
+  .drawer-cta-primary:hover { opacity: 0.9; transform: translateY(-1px); }
 
   /* ── HERO ── */
   .hero {
@@ -1146,9 +1326,11 @@
 
   /* ── RESPONSIVE ── */
   @media (max-width: 1024px) {
-    nav { padding: 14px 28px; }
+    nav { padding: 14px 20px; }
+    nav.scrolled { padding: 11px 20px; }
     .nav-links { display: none; }
-    nav.scrolled { padding: 11px 28px; }
+    .nav-cta { display: none; }
+    .nav-hamburger { display: flex; }
     .hero { grid-template-columns: 1fr; padding: 110px 32px 70px; text-align: center; }
     .hero-sub, .hero-stats { margin-left: auto; margin-right: auto; }
     .hero-ctas { justify-content: center; }
@@ -1789,10 +1971,43 @@
     <li><a href="#faq">FAQ</a></li>
     <li><a href="https://lamarcerdas.my.id/" target="_blank">Proyek Live 🔗</a></li>
   </ul>
-  <a class="nav-cta" href="https://wa.me/628516803936?text=Halo%20Yuda%2C%20saya%20tertarik%20dengan%20SAPA%20AI" target="_blank">
-    💬 Hubungi Kami
-  </a>
+  <div class="nav-right">
+    <a class="nav-cta" href="https://wa.me/628516803936?text=Halo%20Yuda%2C%20saya%20tertarik%20dengan%20SAPA%20AI" target="_blank">
+      💬 Hubungi Kami
+    </a>
+    <a class="nav-cta-wa" href="https://wa.me/6285117061980?text=Halo%2C%20saya%20ingin%20coba%20AI%20Coach%20Career!" target="_blank">
+      ✨ Coba WA AI Sekarang
+    </a>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
+
+<!-- MOBILE DRAWER -->
+<div class="mobile-drawer" id="mobile-drawer">
+  <div class="drawer-header">
+    <span style="font-size:1.1rem;font-weight:800;"><span style="color:#FFFFFF;">Sapa</span><span style="color:#FF4200;">Cerdas</span></span>
+    <button class="drawer-close" id="drawer-close">✕</button>
+  </div>
+  <ul class="drawer-links">
+    <li><a href="#demo" onclick="closeDrawer()">Demo</a></li>
+    <li><a href="#konstituen" onclick="closeDrawer()">Konstituen</a></li>
+    <li><a href="#cara-kerja" onclick="closeDrawer()">Cara Kerja</a></li>
+    <li><a href="#harga" onclick="closeDrawer()">Harga</a></li>
+    <li><a href="#faq" onclick="closeDrawer()">FAQ</a></li>
+    <li><a href="https://lamarcerdas.my.id/" target="_blank" onclick="closeDrawer()">Proyek Live 🔗</a></li>
+  </ul>
+  <div class="drawer-ctas">
+    <a class="drawer-cta-secondary" href="https://wa.me/628516803936?text=Halo%20Yuda%2C%20saya%20tertarik%20dengan%20SAPA%20AI" target="_blank" onclick="closeDrawer()">
+      💬 Hubungi Kami
+    </a>
+    <a class="drawer-cta-primary" href="https://wa.me/6285117061980?text=Halo%2C%20saya%20ingin%20coba%20AI%20Coach%20Career!" target="_blank" onclick="closeDrawer()">
+      ✨ Coba WA AI Sekarang
+    </a>
+  </div>
+</div>
+<div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
 
 <!-- HERO -->
 <section class="hero">
@@ -2516,6 +2731,34 @@ setInterval(() => {
     b.style.animation = '';
   });
 }, 9000);
+
+// ── MOBILE DRAWER ──
+const hamburger = document.getElementById('nav-hamburger');
+const drawer = document.getElementById('mobile-drawer');
+const overlay = document.getElementById('drawer-overlay');
+
+function openDrawer() {
+  drawer.classList.add('open');
+  overlay.classList.add('open');
+  hamburger.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDrawer() {
+  drawer.classList.remove('open');
+  overlay.classList.remove('open');
+  hamburger.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+hamburger.addEventListener('click', () => {
+  drawer.classList.contains('open') ? closeDrawer() : openDrawer();
+});
+
+document.getElementById('drawer-close').addEventListener('click', closeDrawer);
+
+// Close on ESC
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
 </script>
 </body>
 </html>
